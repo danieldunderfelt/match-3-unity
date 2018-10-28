@@ -177,15 +177,19 @@ public class Dot : MonoBehaviour
     previousRow = row;
     previousColumn = column;
 
-    Dot otherDotScript = otherDot.GetComponent<Dot>();
+    if (otherDot != null) {
+      Dot otherDotScript = otherDot.GetComponent<Dot>();
 
-    otherDotScript.row += assignRow * -1;
-    otherDotScript.column += assignCol * -1;
+      otherDotScript.row += assignRow * -1;
+      otherDotScript.column += assignCol * -1;
 
-    row += assignRow;
-    column += assignCol;
+      row += assignRow;
+      column += assignCol;
 
-    StartCoroutine(CheckMoveCo());
+      StartCoroutine(CheckMoveCo());
+    } else {
+      board.currentState = GameState.move;
+    }
   }
 
   void MovePieces()
